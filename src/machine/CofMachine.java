@@ -56,28 +56,30 @@ public class CofMachine {
         this.cups = cups;
     }
 
-    public int getQuantityPossible() {
-        int [] cupsAvailable = new int[3];
+    public void checkQuantities(Coffee drink) {
 
-        cupsAvailable[0] = this.water / 200;
-        cupsAvailable[1] = this.milk / 50;
-        cupsAvailable[2] = this.coffeeBeans / 15;
-
-        //bubble sort
-
-        int n = cupsAvailable.length;
-        for (int i = 0; i < n-1 ; i++) {
-            for (int j = 0; j< n-i-1; j++) {
-                if (cupsAvailable[j] > cupsAvailable[j+1]) {
-                    //swap [j+1] and [j]
-                    int temp = cupsAvailable[j];
-                    cupsAvailable[j] = cupsAvailable[j+1];
-                    cupsAvailable[j+1] = temp;
-                }
-            }
-
+        if (this.getWater() < drink.getWaterRequired()) {
+            System.out.println("Sorry, not enough water!\n");
+        } else if (this.getMilk() < drink.getMilkRequired()) {
+            System.out.println("Sorry, not enough milk!\n");
+        } else if (this.getCoffeeBeans() < drink.getCoffeeBeansRequired()) {
+            System.out.println("Sorry, not enough coffee beans!\n");
+        } else if (this.getCups() < 1) {
+            System.out.println("Sorry, not enough cups!\n");
+        } else {
+            makeCoffee(drink);
+            System.out.println("I have enough resources, making you a coffee!\n");
         }
-        return cupsAvailable[0];
+
+
+    }
+
+    public void makeCoffee(Coffee drink) {
+        this.setWater(this.getWater() - drink.getWaterRequired());
+        this.setMilk(this.getMilk() - drink.getMilkRequired());
+        this.setCoffeeBeans(this.getCoffeeBeans() - drink.getCoffeeBeansRequired());
+        this.setMoney(this.getMoney() + drink.getPrice());
+        this.setCups(this.getCups() - 1);
     }
 
     public void printDetails() {
@@ -86,7 +88,7 @@ public class CofMachine {
                 + this.getMilk() + " ml of milk\n"
                 + this.getCoffeeBeans() + " g of coffee beans\n"
                 + this.getCups() + " disposable cups\n"
-                + "$" + this.getMoney() + " of money");
+                + "$" + this.getMoney() + " of money\n");
     }
 
 }
