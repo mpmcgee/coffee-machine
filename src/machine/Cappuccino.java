@@ -1,24 +1,13 @@
 package machine;
 
 public class Cappuccino extends Coffee {
-    protected final int waterRequired = 200;
-    protected final int milkRequired = 100;
-    protected final int coffeeBeansRequired = 12;
-    protected final int price = 6;
 
-    public int getWaterRequired() {
-        return waterRequired;
-    }
+    //ingredients and price for cappuccino
+    public Cappuccino() {
+        this.waterRequired = 200;
+        this.coffeeBeansRequired = 100;
+        this.milkRequired = 12;
+        this.price = 6;
 
-    public int getMilkRequired() {
-        return milkRequired;
-    }
-
-    public int getCoffeeBeansRequired() {
-        return coffeeBeansRequired;
-    }
-
-    public int getPrice() {
-        return price;
     }
 }
